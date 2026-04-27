@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html>
 
 <head>
 
@@ -8,53 +8,13 @@
 
 <title>Tap App</title>
 
-<style>
-
-body {
-
-  background: #0a84ff;
-
-  color: white;
-
-  text-align: center;
-
-  font-family: sans-serif;
-
-}
-
-h1 {
-
-  margin-top: 50px;
-
-}
-
-button {
-
-  padding: 15px 30px;
-
-  font-size: 20px;
-
-  background: white;
-
-  color: #0a84ff;
-
-  border: none;
-
-  border-radius: 10px;
-
-}
-
-</style>
-
 </head>
 
 <body>
 
-<h1>Tap アプリ</h1>
+<h1>Tapアプリ</h1>
 
-<p>タップを記録するシンプルアプリ</p>
-
-<button>インストール（開発用）</button>
+<p>完成！</p>
 
 </body>
 
