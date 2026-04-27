@@ -1,20 +1,112 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="ja">
 
 <head>
 
 <meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Tap App</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#0a84ff">
+
+<style>
+
+body {
+
+  background: linear-gradient(#0a84ff, #00cfff);
+
+  color: white;
+
+  text-align: center;
+
+  font-family: sans-serif;
+
+}
+
+h1 {
+
+  margin-top: 80px;
+
+}
+
+#tap {
+
+  margin-top: 50px;
+
+  width: 200px;
+
+  height: 200px;
+
+  background: #0040ff;
+
+  border-radius: 50%;
+
+  line-height: 200px;
+
+  font-size: 24px;
+
+}
+
+button {
+
+  margin-top: 30px;
+
+  padding: 10px 20px;
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<h1>Tapアプリ</h1>
+<h1>Tap アプリ</h1>
 
-<p>成功！</p>
+<div id="tap">タップ</div>
+
+<p id="count">回数: 0</p>
+
+<button onclick="clearData()">リセット</button>
+
+<script>
+
+let count = localStorage.getItem("count") || 0;
+
+document.getElementById("count").innerText = "回数: " + count;
+
+document.getElementById("tap").onclick = () => {
+
+  count++;
+
+  localStorage.setItem("count", count);
+
+  document.getElementById("count").innerText = "回数: " + count;
+
+};
+
+function clearData() {
+
+  count = 0;
+
+  localStorage.setItem("count", count);
+
+  document.getElementById("count").innerText = "回数: 0";
+
+}
+
+if ('serviceWorker' in navigator) {
+
+  navigator.serviceWorker.register('sw.js');
+
+}
+
+</script>
 
 </body>
 
