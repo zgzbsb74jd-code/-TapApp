@@ -46,8 +46,6 @@ body{
 
     text-align:center;
 
-    overflow:hidden;
-
 }
 
 .container{
@@ -64,19 +62,17 @@ body{
 
 .title{
 
-    margin-top:40px;
+    margin-top:30px;
 
-    font-size:58px;
+    font-size:54px;
 
     font-weight:900;
-
-    letter-spacing:-2px;
 
 }
 
 .countTitle{
 
-    margin-top:70px;
+    margin-top:50px;
 
     font-size:28px;
 
@@ -96,19 +92,19 @@ body{
 
 .tapButton{
 
-    width:300px;
+    width:280px;
 
-    height:300px;
+    height:280px;
 
     border-radius:50%;
 
-    margin:70px auto 60px;
+    margin:60px auto 50px;
 
     background:linear-gradient(
 
         180deg,
 
-        #143dff,
+        #163dff,
 
         #003cff
 
@@ -120,17 +116,17 @@ body{
 
     align-items:center;
 
-    font-size:80px;
+    font-size:72px;
 
     font-weight:900;
 
-    border:8px solid rgba(255,255,255,0.95);
+    border:8px solid white;
 
     box-shadow:
 
         0 25px 50px rgba(0,0,0,0.25),
 
-        0 0 40px rgba(255,255,255,0.35);
+        0 0 40px rgba(255,255,255,0.3);
 
     transition:0.1s;
 
@@ -138,7 +134,7 @@ body{
 
 .tapButton:active{
 
-    transform:scale(0.96);
+    transform:scale(0.95);
 
 }
 
@@ -148,17 +144,17 @@ body{
 
     flex-direction:column;
 
-    gap:25px;
-
     align-items:center;
+
+    gap:20px;
 
 }
 
 .whiteButton{
 
-    width:320px;
+    width:300px;
 
-    height:72px;
+    height:70px;
 
     border-radius:40px;
 
@@ -168,7 +164,7 @@ body{
 
     color:white;
 
-    font-size:30px;
+    font-size:28px;
 
     font-weight:700;
 
@@ -176,13 +172,13 @@ body{
 
 .redButton{
 
-    width:320px;
+    width:300px;
 
-    height:80px;
-
-    border-radius:40px;
+    height:75px;
 
     border:none;
+
+    border-radius:40px;
 
     background:linear-gradient(
 
@@ -196,7 +192,7 @@ body{
 
     color:white;
 
-    font-size:32px;
+    font-size:30px;
 
     font-weight:800;
 
@@ -206,33 +202,21 @@ body{
 
 }
 
-.footer{
-
-    margin-top:80px;
-
-    font-size:22px;
-
-    opacity:0.95;
-
-}
-
 .history{
 
     margin-top:40px;
+
+    background:rgba(255,255,255,0.12);
+
+    border-radius:25px;
+
+    padding:20px;
 
     max-height:250px;
 
     overflow:auto;
 
     text-align:left;
-
-    padding:20px;
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,0.12);
-
-    backdrop-filter:blur(10px);
 
 }
 
@@ -243,6 +227,16 @@ body{
     border-bottom:1px solid rgba(255,255,255,0.2);
 
     font-size:18px;
+
+}
+
+.footer{
+
+    margin-top:50px;
+
+    font-size:18px;
+
+    opacity:0.9;
 
 }
 
@@ -280,7 +274,7 @@ body{
 
     <div class="buttons">
 
-        <button class="whiteButton">
+        <button class="whiteButton" onclick="showStats()">
 
             📊 統計を見る
 
@@ -294,13 +288,11 @@ body{
 
     </div>
 
+    <div class="history" id="history"></div>
+
     <div class="footer">
 
-        タップした回数はこの端末に保存されます
-
-    </div>
-
-    <div class="history" id="history">
+        タップ記録は自動保存されます
 
     </div>
 
@@ -326,7 +318,9 @@ function updateScreen(){
 
     records.slice().reverse().forEach(record=>{
 
-        const div = document.createElement("div");
+        const div =
+
+        document.createElement("div");
 
         div.className = "record";
 
@@ -377,6 +371,20 @@ function clearData(){
         updateScreen();
 
     }
+
+}
+
+function showStats(){
+
+    alert(
+
+        "総タップ数: " +
+
+        records.length +
+
+        "回"
+
+    );
 
 }
 
