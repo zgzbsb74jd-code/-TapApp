@@ -8,59 +8,241 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tap App</title>
+<title>タップ記録</title>
 
 <link rel="manifest" href="manifest.json">
 
-<meta name="theme-color" content="#0a84ff">
-
 <style>
 
-body {
+*{
 
-  background: linear-gradient(#0a84ff, #00cfff);
+    margin:0;
 
-  color: white;
+    padding:0;
 
-  text-align: center;
-
-  font-family: sans-serif;
+    box-sizing:border-box;
 
 }
 
-h1 {
+body{
 
-  margin-top: 80px;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
 
-}
+    min-height:100vh;
 
-#tap {
+    background:linear-gradient(
 
-  margin-top: 50px;
+        180deg,
 
-  width: 200px;
+        #009dff 0%,
 
-  height: 200px;
+        #00b7ff 40%,
 
-  background: #0040ff;
+        #00cfff 100%
 
-  border-radius: 50%;
+    );
 
-  line-height: 200px;
+    color:white;
 
-  font-size: 24px;
+    text-align:center;
 
-  margin-left: auto;
-
-  margin-right: auto;
+    overflow:hidden;
 
 }
 
-button {
+.container{
 
-  margin-top: 30px;
+    width:100%;
 
-  padding: 10px 20px;
+    max-width:500px;
+
+    margin:auto;
+
+    padding:40px 25px;
+
+}
+
+.title{
+
+    margin-top:40px;
+
+    font-size:58px;
+
+    font-weight:900;
+
+    letter-spacing:-2px;
+
+}
+
+.countTitle{
+
+    margin-top:70px;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.count{
+
+    font-size:90px;
+
+    font-weight:900;
+
+    margin-top:10px;
+
+}
+
+.tapButton{
+
+    width:300px;
+
+    height:300px;
+
+    border-radius:50%;
+
+    margin:70px auto 60px;
+
+    background:linear-gradient(
+
+        180deg,
+
+        #143dff,
+
+        #003cff
+
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:80px;
+
+    font-weight:900;
+
+    border:8px solid rgba(255,255,255,0.95);
+
+    box-shadow:
+
+        0 25px 50px rgba(0,0,0,0.25),
+
+        0 0 40px rgba(255,255,255,0.35);
+
+    transition:0.1s;
+
+}
+
+.tapButton:active{
+
+    transform:scale(0.96);
+
+}
+
+.buttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+    align-items:center;
+
+}
+
+.whiteButton{
+
+    width:320px;
+
+    height:72px;
+
+    border-radius:40px;
+
+    border:3px solid white;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:700;
+
+}
+
+.redButton{
+
+    width:320px;
+
+    height:80px;
+
+    border-radius:40px;
+
+    border:none;
+
+    background:linear-gradient(
+
+        180deg,
+
+        #ff4d5a,
+
+        #ff2033
+
+    );
+
+    color:white;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    box-shadow:
+
+        0 10px 25px rgba(255,0,0,0.35);
+
+}
+
+.footer{
+
+    margin-top:80px;
+
+    font-size:22px;
+
+    opacity:0.95;
+
+}
+
+.history{
+
+    margin-top:40px;
+
+    max-height:250px;
+
+    overflow:auto;
+
+    text-align:left;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(10px);
+
+}
+
+.record{
+
+    padding:12px 0;
+
+    border-bottom:1px solid rgba(255,255,255,0.2);
+
+    font-size:18px;
 
 }
 
@@ -70,43 +252,139 @@ button {
 
 <body>
 
-<h1>Tap アプリ</h1>
+<div class="container">
 
-<div id="tap">タップ</div>
+    <div class="title">
 
-<p id="count">回数: 0</p>
+        タップ記録
 
-<button onclick="clearData()">リセット</button>
+    </div>
+
+    <div class="countTitle">
+
+        タップ回数
+
+    </div>
+
+    <div class="count" id="count">
+
+        0
+
+    </div>
+
+    <div class="tapButton" id="tapButton">
+
+        TAP
+
+    </div>
+
+    <div class="buttons">
+
+        <button class="whiteButton">
+
+            📊 統計を見る
+
+        </button>
+
+        <button class="redButton" onclick="clearData()">
+
+            🗑 全データ削除
+
+        </button>
+
+    </div>
+
+    <div class="footer">
+
+        タップした回数はこの端末に保存されます
+
+    </div>
+
+    <div class="history" id="history">
+
+    </div>
+
+</div>
 
 <script>
 
-let count = localStorage.getItem("count") || 0;
+let records =
 
-document.getElementById("count").innerText = "回数: " + count;
+JSON.parse(localStorage.getItem("tapRecords")) || [];
 
-document.getElementById("tap").onclick = () => {
+function updateScreen(){
 
-  count++;
+    document.getElementById("count").innerText =
 
-  localStorage.setItem("count", count);
+    records.length;
 
-  document.getElementById("count").innerText = "回数: " + count;
+    const history =
 
-};
+    document.getElementById("history");
 
-function clearData() {
+    history.innerHTML = "";
 
-  count = 0;
+    records.slice().reverse().forEach(record=>{
 
-  localStorage.setItem("count", count);
+        const div = document.createElement("div");
 
-  document.getElementById("count").innerText = "回数: 0";
+        div.className = "record";
+
+        div.innerText = record;
+
+        history.appendChild(div);
+
+    });
 
 }
 
+document.getElementById("tapButton")
+
+.onclick = ()=>{
+
+    const now = new Date();
+
+    const text =
+
+    now.toLocaleDateString() +
+
+    " " +
+
+    now.toLocaleTimeString();
+
+    records.push(text);
+
+    localStorage.setItem(
+
+        "tapRecords",
+
+        JSON.stringify(records)
+
+    );
+
+    updateScreen();
+
+};
+
+function clearData(){
+
+    if(confirm("全データ削除しますか？")){
+
+        records = [];
+
+        localStorage.removeItem("tapRecords");
+
+        updateScreen();
+
+    }
+
+}
+
+updateScreen();
+
 if ('serviceWorker' in navigator) {
 
-  navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker.register('sw.js');
 
 }
 
