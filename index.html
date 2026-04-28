@@ -6,12 +6,18 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+
+content="width=device-width, initial-scale=1.0">
 
 <title>タップ記録</title>
 
-<link rel="apple-touch-icon" href="Tap T.W/icon.png">
-<style><link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.json">
+
+<link rel="apple-touch-icon" href="icon.png">
+
+<style>
+
 *{
 
     margin:0;
@@ -24,11 +30,19 @@
 
 body{
 
-    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+    font-family:
+
+    -apple-system,
+
+    BlinkMacSystemFont,
+
+    sans-serif;
 
     min-height:100vh;
 
-    background:linear-gradient(
+    background:
+
+    linear-gradient(
 
         180deg,
 
@@ -98,7 +112,9 @@ body{
 
     margin:60px auto 50px;
 
-    background:linear-gradient(
+    background:
+
+    linear-gradient(
 
         180deg,
 
@@ -178,7 +194,9 @@ body{
 
     border-radius:40px;
 
-    background:linear-gradient(
+    background:
+
+    linear-gradient(
 
         180deg,
 
@@ -204,7 +222,9 @@ body{
 
     margin-top:40px;
 
-    background:rgba(255,255,255,0.12);
+    background:
+
+    rgba(255,255,255,0.12);
 
     border-radius:25px;
 
@@ -222,7 +242,9 @@ body{
 
     padding:12px 0;
 
-    border-bottom:1px solid rgba(255,255,255,0.2);
+    border-bottom:
+
+    1px solid rgba(255,255,255,0.2);
 
     font-size:18px;
 
@@ -272,13 +294,21 @@ body{
 
     <div class="buttons">
 
-        <button class="whiteButton" onclick="showStats()">
+        <button
+
+        class="whiteButton"
+
+        onclick="showStats()">
 
             📊 統計を見る
 
         </button>
 
-        <button class="redButton" onclick="clearData()">
+        <button
+
+        class="redButton"
+
+        onclick="clearData()">
 
             🗑 全データ削除
 
@@ -286,7 +316,13 @@ body{
 
     </div>
 
-    <div class="history" id="history"></div>
+    <div
+
+    class="history"
+
+    id="history">
+
+    </div>
 
     <div class="footer">
 
@@ -300,47 +336,89 @@ body{
 
 let records =
 
-JSON.parse(localStorage.getItem("tapRecords")) || [];
+JSON.parse(
+
+localStorage.getItem(
+
+"tapRecords"
+
+)) || [];
 
 function updateScreen(){
 
-    document.getElementById("count").innerText =
+    document.getElementById(
+
+    "count"
+
+    ).innerText =
 
     records.length;
 
     const history =
 
-    document.getElementById("history");
+    document.getElementById(
+
+    "history"
+
+    );
 
     history.innerHTML = "";
 
-    records.slice().reverse().forEach(record=>{
+    records
+
+    .slice()
+
+    .reverse()
+
+    .forEach(record=>{
 
         const div =
 
-        document.createElement("div");
+        document.createElement(
 
-        div.className = "record";
+        "div"
 
-        div.innerText = record;
+        );
 
-        history.appendChild(div);
+        div.className =
+
+        "record";
+
+        div.innerText =
+
+        record;
+
+        history.appendChild(
+
+        div
+
+        );
 
     });
 
 }
 
-document.getElementById("tapButton")
+document
+
+.getElementById(
+
+"tapButton"
+
+)
 
 .onclick = ()=>{
 
-    const now = new Date();
+    const now =
+
+    new Date();
 
     const text =
 
-    now.toLocaleDateString() +
+    now.toLocaleDateString()
 
-    " " +
+    + " "
+
+    +
 
     now.toLocaleTimeString();
 
@@ -360,11 +438,19 @@ document.getElementById("tapButton")
 
 function clearData(){
 
-    if(confirm("全データ削除しますか？")){
+    if(confirm(
+
+    "全データ削除しますか？"
+
+    )){
 
         records = [];
 
-        localStorage.removeItem("tapRecords");
+        localStorage.removeItem(
+
+        "tapRecords"
+
+        );
 
         updateScreen();
 
@@ -376,9 +462,13 @@ function showStats(){
 
     alert(
 
-        "総タップ数: " +
+        "総タップ数: "
 
-        records.length +
+        +
+
+        records.length
+
+        +
 
         "回"
 
@@ -388,9 +478,19 @@ function showStats(){
 
 updateScreen();
 
-if ('serviceWorker' in navigator) {
+if(
 
-    navigator.serviceWorker.register('sw.js');
+'serviceWorker'
+
+in navigator
+
+){
+
+navigator
+
+.serviceWorker
+
+.register('sw.js');
 
 }
 
