@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+
+content="width=device-width, initial-scale=1.0">
+
+<title>統計</title>
+
+<style>
+
+body{
+
+    font-family:
+
+    -apple-system,
+
+    BlinkMacSystemFont,
+
+    sans-serif;
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        #009dff,
+
+        #00cfff
+
+    );
+
+    color:white;
+
+    text-align:center;
+
+    min-height:100vh;
+
+    margin:0;
+
+    padding:30px;
+
+}
+
+.title{
+
+    font-size:50px;
+
+    font-weight:900;
+
+    margin-top:40px;
+
+}
+
+.total{
+
+    font-size:90px;
+
+    font-weight:900;
+
+    margin-top:50px;
+
+}
+
+.label{
+
+    font-size:28px;
+
+    margin-top:10px;
+
+}
+
+.box{
+
+    margin-top:50px;
+
+    background:
+
+    rgba(255,255,255,0.12);
+
+    border-radius:25px;
+
+    padding:25px;
+
+    text-align:left;
+
+    max-width:500px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+.record{
+
+    padding:12px 0;
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,0.2);
+
+    font-size:20px;
+
+}
+
+.backButton{
+
+    margin-top:50px;
+
+    width:280px;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:white;
+
+    color:#009dff;
+
+    font-size:28px;
+
+    font-weight:800;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="title">
+
+📊 統計
+
+</div>
+
+<div class="total" id="total">
+
+0
+
+</div>
+
+<div class="label">
+
+総タップ数
+
+</div>
+
+<div class="box" id="history">
+
+</div>
+
+<button
+
+class="backButton"
+
+onclick="location.href='index.html'">
+
+← 戻る
+
+</button>
+
+<script>
+
+let records =
+
+JSON.parse(
+
+localStorage.getItem(
+
+"tapRecords"
+
+)) || [];
+
+document.getElementById(
+
+"total"
+
+).innerText =
+
+records.length;
+
+const history =
+
+document.getElementById(
+
+"history"
+
+);
+
+records
+
+.slice()
+
+.reverse()
+
+.forEach(record=>{
+
+    const div =
+
+    document.createElement(
+
+    "div"
+
+    );
+
+    div.className =
+
+    "record";
+
+    div.innerText =
+
+    record;
+
+    history.appendChild(
+
+    div
+
+    );
+
+});
+
+</script>
+
+</body>
+
+</html>
